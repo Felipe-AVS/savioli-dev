@@ -5,52 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfólio de [Seu Nome], desenvolvedor web.">
   <title>Portfólio - [Seu Nome]</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- UIkit CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
 
-  <!-- Barra de navegação -->
-  <header id="home">
-    <nav>
-      <div class="logo">
-        <h1>[Seu Nome]</h1>
-      </div>
-      <ul>
+  <!-- Barra de Navegação -->
+  <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+    <div class="uk-navbar-left">
+      <a class="uk-navbar-item uk-logo" href="#">[Seu Nome]</a>
+    </div>
+    <div class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#projetos">Projetos</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
-    </nav>
-    <div class="hero">
-      <h2>Desenvolvedor Web</h2>
-      <p>Construindo soluções criativas e inovadoras para o seu negócio.</p>
-      <a href="#projetos" class="cta-button">Veja meus projetos</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="uk-position-relative uk-light" uk-img>
+    <div class="uk-background-cover uk-height-viewport" style="background-image: url('https://via.placeholder.com/1920x1080');" uk-img>
+      <div class="uk-position-center uk-text-center uk-overlay uk-overlay-primary uk-padding">
+        <h1 class="uk-heading-primary">Olá, eu sou [Seu Nome]</h1>
+        <p class="uk-lead">Desenvolvedor Web - Criando soluções criativas e inovadoras</p>
+        <a href="#projetos" class="uk-button uk-button-default uk-button-large uk-margin-top">Veja meus projetos</a>
+      </div>
     </div>
   </header>
 
   <!-- Seção Sobre -->
-  <section id="sobre" class="section sobre">
-    <div class="content">
-      <h2>Sobre Mim</h2>
-      <p>Sou [Seu Nome], desenvolvedor web com experiência em [tecnologias que você domina]. Meu objetivo é criar experiências digitais impactantes, utilizando as melhores práticas de desenvolvimento e design.</p>
+  <section id="sobre" class="uk-section uk-section-muted">
+    <div class="uk-container">
+      <h2 class="uk-text-center">Sobre Mim</h2>
+      <p class="uk-text-lead uk-text-center">Sou [Seu Nome], um desenvolvedor web apaixonado por criar soluções digitais criativas e funcionais. Tenho experiência em [tecnologias que você domina] e estou sempre em busca de novos desafios!</p>
     </div>
   </section>
 
   <!-- Seção Projetos -->
-  <section id="projetos" class="section projetos">
-    <div class="content">
-      <h2>Meus Projetos</h2>
-      <div class="projeto-cards">
-        <div class="card">
-          <h3>Projeto 1</h3>
-          <p>Descrição do projeto 1. Tecnologias utilizadas: HTML, CSS, JavaScript.</p>
-          <a href="https://github.com/seu-usuario/projeto1" target="_blank" class="cta-button">Ver no GitHub</a>
+  <section id="projetos" class="uk-section">
+    <div class="uk-container">
+      <h2 class="uk-text-center">Meus Projetos</h2>
+      <div class="uk-child-width-1-3@s uk-grid-small uk-grid-match" uk-grid>
+        <div>
+          <div class="uk-card uk-card-default uk-card-hover">
+            <div class="uk-card-media-top">
+              <img src="https://via.placeholder.com/350x200" alt="Projeto 1">
+            </div>
+            <div class="uk-card-body">
+              <h3 class="uk-card-title">Projeto 1</h3>
+              <p>Descrição do projeto 1. Tecnologias utilizadas: HTML, CSS, JavaScript.</p>
+              <a href="https://github.com/seu-usuario/projeto1" target="_blank" class="uk-button uk-button-text">Ver no GitHub</a>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <h3>Projeto 2</h3>
-          <p>Descrição do projeto 2. Tecnologias utilizadas: Python, Django, SQL.</p>
-          <a href="https://github.com/seu-usuario/projeto2" target="_blank" class="cta-button">Ver no GitHub</a>
+        <div>
+          <div class="uk-card uk-card-default uk-card-hover">
+            <div class="uk-card-media-top">
+              <img src="https://via.placeholder.com/350x200" alt="Projeto 2">
+            </div>
+            <div class="uk-card-body">
+              <h3 class="uk-card-title">Projeto 2</h3>
+              <p>Descrição do projeto 2. Tecnologias utilizadas: Python, Django, SQL.</p>
+              <a href="https://github.com/seu-usuario/projeto2" target="_blank" class="uk-button uk-button-text">Ver no GitHub</a>
+            </div>
+          </div>
         </div>
         <!-- Adicione mais projetos conforme necessário -->
       </div>
@@ -58,11 +85,11 @@
   </section>
 
   <!-- Seção Contato -->
-  <section id="contato" class="section contato">
-    <div class="content">
-      <h2>Entre em Contato</h2>
-      <p>Você pode me encontrar nas seguintes plataformas:</p>
-      <ul class="social-links">
+  <section id="contato" class="uk-section uk-section-muted">
+    <div class="uk-container">
+      <h2 class="uk-text-center">Entre em Contato</h2>
+      <p class="uk-text-center">Você pode me encontrar nas seguintes plataformas:</p>
+      <ul class="uk-list uk-list-divider uk-text-center">
         <li><a href="https://www.linkedin.com/in/seu-linkedin" target="_blank">LinkedIn</a></li>
         <li><a href="mailto:seu-email@dominio.com">Email</a></li>
         <li><a href="https://github.com/seu-usuario" target="_blank">GitHub</a></li>
@@ -71,11 +98,15 @@
   </section>
 
   <!-- Rodapé -->
-  <footer>
-    <div class="content">
-      <p>&copy; 2025 [Seu Nome]. Todos os direitos reservados.</p>
-    </div>
+  <footer class="uk-text-center uk-padding-small uk-background-secondary">
+    <p>&copy; 2025 [Seu Nome]. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- UIkit JS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
+
+  <!-- Animações JS -->
+  <script src="script.js"></script>
 </body>
 </html>
