@@ -3,53 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Portfólio</title>
+  <meta name="description" content="Portfólio de [Seu Nome], desenvolvedor web.">
+  <title>Portfólio - [Seu Nome]</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Olá, eu sou [Seu Nome]</h1>
-      <p>Desenvolvedor Front-End / Back-End / Full Stack</p>
-      <nav>
-        <ul>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#projetos">Projetos</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
+
+  <!-- Barra de navegação -->
+  <header id="home">
+    <nav>
+      <div class="logo">
+        <h1>[Seu Nome]</h1>
+      </div>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h2>Desenvolvedor Web</h2>
+      <p>Construindo soluções criativas e inovadoras para o seu negócio.</p>
+      <a href="#projetos" class="cta-button">Veja meus projetos</a>
     </div>
   </header>
 
-  <section id="sobre" class="section">
-    <div class="container">
+  <!-- Seção Sobre -->
+  <section id="sobre" class="section sobre">
+    <div class="content">
       <h2>Sobre Mim</h2>
-      <p>Sou um desenvolvedor apaixonado por tecnologia e inovação. Trabalho com [tecnologias que você domina] e sempre busco aprender algo novo. Meu objetivo é criar soluções que impactem positivamente a vida das pessoas.</p>
+      <p>Sou [Seu Nome], desenvolvedor web com experiência em [tecnologias que você domina]. Meu objetivo é criar experiências digitais impactantes, utilizando as melhores práticas de desenvolvimento e design.</p>
     </div>
   </section>
 
-  <section id="projetos" class="section">
-    <div class="container">
+  <!-- Seção Projetos -->
+  <section id="projetos" class="section projetos">
+    <div class="content">
       <h2>Meus Projetos</h2>
-      <div class="projeto">
-        <h3>Projeto 1</h3>
-        <p>Descrição do projeto 1. Tecnologias utilizadas: HTML, CSS, JavaScript.</p>
-        <a href="https://github.com/seu-usuario/projeto1" target="_blank">Ver no GitHub</a>
+      <div class="projeto-cards">
+        <div class="card">
+          <h3>Projeto 1</h3>
+          <p>Descrição do projeto 1. Tecnologias utilizadas: HTML, CSS, JavaScript.</p>
+          <a href="https://github.com/seu-usuario/projeto1" target="_blank" class="cta-button">Ver no GitHub</a>
+        </div>
+        <div class="card">
+          <h3>Projeto 2</h3>
+          <p>Descrição do projeto 2. Tecnologias utilizadas: Python, Django, SQL.</p>
+          <a href="https://github.com/seu-usuario/projeto2" target="_blank" class="cta-button">Ver no GitHub</a>
+        </div>
+        <!-- Adicione mais projetos conforme necessário -->
       </div>
-      <div class="projeto">
-        <h3>Projeto 2</h3>
-        <p>Descrição do projeto 2. Tecnologias utilizadas: Python, Django, SQL.</p>
-        <a href="https://github.com/seu-usuario/projeto2" target="_blank">Ver no GitHub</a>
-      </div>
-      <!-- Adicione mais projetos conforme necessário -->
     </div>
   </section>
 
-  <section id="contato" class="section">
-    <div class="container">
+  <!-- Seção Contato -->
+  <section id="contato" class="section contato">
+    <div class="content">
       <h2>Entre em Contato</h2>
-      <p>Você pode me encontrar em:</p>
-      <ul>
+      <p>Você pode me encontrar nas seguintes plataformas:</p>
+      <ul class="social-links">
         <li><a href="https://www.linkedin.com/in/seu-linkedin" target="_blank">LinkedIn</a></li>
         <li><a href="mailto:seu-email@dominio.com">Email</a></li>
         <li><a href="https://github.com/seu-usuario" target="_blank">GitHub</a></li>
@@ -57,10 +70,12 @@
     </div>
   </section>
 
+  <!-- Rodapé -->
   <footer>
-    <div class="container">
+    <div class="content">
       <p>&copy; 2025 [Seu Nome]. Todos os direitos reservados.</p>
     </div>
   </footer>
+
 </body>
 </html>
