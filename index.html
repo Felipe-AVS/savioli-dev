@@ -27,6 +27,11 @@
           0 10px 10px -5px rgba(0, 0, 0, 0.04);
       }
 
+      .partner-card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+
       .nav-link {
         position: relative;
       }
@@ -86,6 +91,11 @@
               >Projetos</a
             >
             <a
+              href="#partners"
+              class="nav-link text-gray-700 hover:text-blue-600 font-medium"
+              >Parceiros</a
+            >
+            <a
               href="#skills"
               class="nav-link text-gray-700 hover:text-blue-600 font-medium"
               >Habilidades</a
@@ -118,6 +128,11 @@
             href="#projects"
             class="block py-2 text-gray-700 hover:text-blue-600"
             >Projetos</a
+          >
+          <a
+            href="#partners"
+            class="block py-2 text-gray-700 hover:text-blue-600"
+            >Parceiros</a
           >
           <a href="#skills" class="block py-2 text-gray-700 hover:text-blue-600"
             >Habilidades</a
@@ -375,8 +390,85 @@
       </div>
     </section>
 
+    <!-- Partners Section -->
+    <section id="partners" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">
+          Parceiros e Projetos em Colaboração
+        </h2>
+        <p class="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+          Empresas e projetos com os quais tive o prazer de colaborar
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Partner 1 -->
+          <div class="partner-card bg-gray-50 rounded-xl p-6 shadow-md transition duration-300">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-heartbeat text-blue-600 text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Doctor +</h3>
+            </div>
+            <p class="text-gray-600 mb-4">
+              Colaboração no desenvolvimento do sistema de gestão médica, implementando funcionalidades de agendamento e prontuário eletrônico.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">PHP</span>
+              <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">MySQL</span>
+              <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Bootstrap</span>
+            </div>
+          </div>
+
+          <!-- Partner 2 -->
+          <div class="partner-card bg-gray-50 rounded-xl p-6 shadow-md transition duration-300">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-building text-purple-600 text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Persona Coworking</h3>
+            </div>
+            <p class="text-gray-600 mb-4">
+              Manutenção e desenvolvimento de novas funcionalidades para o site da empresa, garantindo estabilidade e melhorias contínuas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">WordPress</span>
+              <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">PHP</span>
+              <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">CSS</span>
+            </div>
+          </div>
+
+          <!-- Partner 3 -->
+          <div class="partner-card bg-gray-50 rounded-xl p-6 shadow-md transition duration-300">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-file-medical text-green-600 text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Clínica Médica</h3>
+            </div>
+            <p class="text-gray-600 mb-4">
+              Desenvolvimento de solução de extração de dados de laudos médicos em PDF, automatizando processos administrativos.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Python</span>
+              <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">PyMuPDF</span>
+              <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">OCR</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <p class="text-gray-600 mb-6">Tem um projeto em mente? Vamos conversar!</p>
+          <a
+            href="#contact"
+            class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 inline-block"
+            >Iniciar colaboração</a
+          >
+        </div>
+      </div>
+    </section>
+
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-white">
+    <section id="skills" class="py-20 bg-gray-50">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">
           Minhas Habilidades
@@ -390,7 +482,7 @@
           class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
         >
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
@@ -401,7 +493,7 @@
           </div>
 
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
@@ -412,7 +504,7 @@
           </div>
 
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
@@ -423,7 +515,7 @@
           </div>
 
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
@@ -434,7 +526,7 @@
           </div>
 
         <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
@@ -445,7 +537,7 @@
           </div>
 
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
@@ -456,7 +548,7 @@
           </div>
 
           <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg"
@@ -467,7 +559,7 @@
           </div>
 
            <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
@@ -478,7 +570,7 @@
           </div>
 
            <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
@@ -489,7 +581,7 @@
           </div>
 
            <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
@@ -500,7 +592,7 @@
           </div>
 
            <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg"
@@ -511,7 +603,7 @@
           </div>
 
            <div
-            class="skill-item flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:shadow-md transition duration-300"
+            class="skill-item flex flex-col items-center p-6 bg-white rounded-xl hover:shadow-md transition duration-300"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
@@ -635,6 +727,13 @@
                     href="#projects"
                     class="text-gray-400 hover:text-white transition duration-300"
                     >Projetos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#partners"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Parceiros</a
                   >
                 </li>
                 <li>
