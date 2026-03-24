@@ -1,1087 +1,385 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Savioli Dev | Sistemas & Automações</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Savioli Dev | Sistemas & Automações</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-      :root {
-        --primary: #3b82f6;
-        --primary-dark: #2563eb;
-        --primary-light: #60a5fa;
-        --dark-bg: #0f172a;
-        --dark-card: #1e293b;
-        --dark-text: #f8fafc;
-        --dark-text-secondary: #cbd5e1;
-        --accent: #8b5cf6;
-      }
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #8b5cf6;
+      --dark-bg: #020617;
+      --dark-card: #0f172a;
+      --dark-surface: #1e293b;
+      --text-light: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(59,130,246,0.2);
+    }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        scroll-behavior: smooth;
-        background-color: var(--dark-bg);
-        color: var(--dark-text);
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      .gradient-bg {
-        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      scroll-behavior: smooth;
+    }
 
-      .dark-gradient-bg {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      }
+    /* Modern glass effect */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.15);
+    }
 
-      .project-card {
-        transition: all 0.3s ease;
-        background-color: var(--dark-card);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-      .project-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3);
-        border-color: var(--primary);
-      }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 3px;
+    }
 
-      .nav-link {
-        position: relative;
-      }
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.4);
+    }
 
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -2px;
-        left: 0;
-        background-color: var(--primary);
-        transition: width 0.3s ease;
-      }
+    .skill-badge {
+      transition: all 0.2s ease;
+    }
+    .skill-badge:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
 
-      .nav-link:hover::after {
-        width: 100%;
-      }
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid rgba(59,130,246,0.3);
+      transition: border-color 0.3s;
+    }
+    .timeline-item:hover {
+      border-left-color: var(--primary);
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -9px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+    }
 
-      .skill-badge {
-        transition: all 0.3s ease;
-      }
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 10px;
+    }
 
-      .skill-badge:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
-          0 2px 4px -1px rgba(0, 0, 0, 0.1);
-      }
+    .btn-primary {
+      background: linear-gradient(95deg, #3b82f6, #2563eb);
+      transition: all 0.25s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -12px #3b82f6;
+    }
 
-      /* 🔹 Harmoniza logos e imagens de parceiros/projetos */
-      .logo-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 0.05);
-        height: 180px;
-        overflow: hidden;
-        border-radius: 12px 12px 0 0;
-      }
+    .project-img {
+      transition: transform 0.5s ease;
+    }
+    .group:hover .project-img {
+      transform: scale(1.05);
+    }
 
-      .logo-container img {
-        max-height: 100px;
-        width: auto;
-        object-fit: contain;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        transition: transform 0.3s ease;
-      }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
 
-      .logo-container img:hover {
-        transform: scale(1.05);
-      }
-
-      /* 🔹 Imagens dos projetos */
-      .project-img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-        border-radius: 12px 12px 0 0;
-      }
-
-      .project-img:hover {
-        transform: scale(1.03);
-      }
-
-      /* Animações sutis */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .animate-fadeInUp {
-        animation: fadeInUp 0.6s ease-out;
-      }
-
-      .animate-delay-100 {
-        animation-delay: 0.1s;
-      }
-
-      .animate-delay-200 {
-        animation-delay: 0.2s;
-      }
-
-      .animate-delay-300 {
-        animation-delay: 0.3s;
-      }
-
-      /* Tech elements */
-      .tech-grid {
-        background-image: 
-          radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.1) 0%, transparent 55%),
-          radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 55%);
-      }
-
-      .glow {
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-      }
-
-      .glow:hover {
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-      }
-
-      /* Header com blur */
-      header {
-        backdrop-filter: blur(10px);
-        background-color: rgba(15, 23, 42, 0.8);
-      }
-
-      /* Cards com gradiente sutil */
-      .service-card {
-        background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
-
-      .service-card:hover {
-        background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(15, 23, 42, 0.8));
-        border-color: var(--primary);
-      }
-
-      /* Botões modernos */
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        transition: all 0.3s ease;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-      }
-
-      .btn-outline {
-        border: 2px solid var(--primary);
-        transition: all 0.3s ease;
-      }
-
-      .btn-outline:hover {
-        background-color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-      }
-
-      /* Scrollbar personalizada */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: var(--dark-bg);
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: 4px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--primary-dark);
-      }
-
-      /* Ícones das linguagens - CORRIGIDO */
-      .skill-icon {
-        height: 48px;
-        width: 48px;
-        margin-bottom: 12px;
-        transition: transform 0.3s ease;
-      }
-
-      .skill-icon:hover {
-        transform: scale(1.1);
-      }
-    </style>
-  </head>
-  <body class="tech-grid">
-    <!-- Header/Navigation -->
-    <header class="fixed w-full z-50">
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <div class="mr-4">
-              <span class="text-2xl font-bold text-blue-400">Savioli</span>
-              <span class="text-2xl font-bold text-white">Dev</span>
-            </div>
-          </div>
-
-          <nav class="hidden md:flex space-x-8">
-            <a
-              href="#home"
-              class="nav-link text-gray-300 hover:text-blue-400 font-medium"
-              >Início</a
-            >
-            <a
-              href="#services"
-              class="nav-link text-gray-300 hover:text-blue-400 font-medium"
-              >Serviços</a
-            >
-            <a href="#partners" class="nav-link text-gray-300 hover:text-blue-400 font-medium">Parceiros</a>
-            <a href="#collab" class="nav-link text-gray-300 hover:text-blue-400 font-medium">Colaborações</a>
-            <a
-              href="#projects"
-              class="nav-link text-gray-300 hover:text-blue-400 font-medium"
-              >Projetos</a
-            >
-            <a
-              href="#skills"
-              class="nav-link text-gray-300 hover:text-blue-400 font-medium"
-              >Habilidades</a
-            >
-            <a
-              href="#contact"
-              class="nav-link text-gray-300 hover:text-blue-400 font-medium"
-              >Contato</a
-            >
-          </nav>
-
-          <div class="md:hidden">
-            <button id="menu-toggle" class="text-gray-300 focus:outline-none">
-              <i class="fas fa-bars text-2xl"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 bg-dark-card rounded-lg p-4">
-          <a href="#home" class="block py-2 text-gray-300 hover:text-blue-400"
-            >Início</a
-          >
-          <a
-            href="#services"
-            class="block py-2 text-gray-300 hover:text-blue-400"
-            >Serviços</a
-          >
-          <a href="#partners" class="block py-2 text-gray-300 hover:text-blue-400">Parceiros</a>
-          <a href="#collab" class="block py-2 text-gray-300 hover:text-blue-400">Colaborações</a>
-          <a
-            href="#projects"
-            class="block py-2 text-gray-300 hover:text-blue-400"
-            >Projetos</a
-          >
-          <a href="#skills" class="block py-2 text-gray-300 hover:text-blue-400"
-            >Habilidades</a
-          >
-          <a
-            href="#contact"
-            class="block py-2 text-gray-300 hover:text-blue-400"
-            >Contato</a
-          >
-        </div>
+  <!-- Header Glossy -->
+  <header class="fixed w-full z-50 glass-card shadow-lg transition-all duration-300">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+      <div class="text-2xl font-black tracking-tight">
+        <span class="text-blue-400">Savioli</span><span class="text-white">Dev</span>
       </div>
-    </header>
+      <nav class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="#home" class="hover:text-blue-400 transition">Início</a>
+        <a href="#about" class="hover:text-blue-400 transition">Sobre</a>
+        <a href="#services" class="hover:text-blue-400 transition">Serviços</a>
+        <a href="#experience" class="hover:text-blue-400 transition">Trajetória</a>
+        <a href="#partners" class="hover:text-blue-400 transition">Parceiros</a>
+        <a href="#projects" class="hover:text-blue-400 transition">Projetos</a>
+        <a href="#skills" class="hover:text-blue-400 transition">Tech Stack</a>
+        <a href="#contact" class="hover:text-blue-400 transition">Contato</a>
+      </nav>
+      <button id="menu-toggle" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-dark-card/90 backdrop-blur-md">
+      <a href="#home" class="block py-2 hover:text-blue-400">Início</a>
+      <a href="#about" class="block py-2 hover:text-blue-400">Sobre</a>
+      <a href="#services" class="block py-2 hover:text-blue-400">Serviços</a>
+      <a href="#experience" class="block py-2 hover:text-blue-400">Trajetória</a>
+      <a href="#partners" class="block py-2 hover:text-blue-400">Parceiros</a>
+      <a href="#projects" class="block py-2 hover:text-blue-400">Projetos</a>
+      <a href="#skills" class="block py-2 hover:text-blue-400">Tech Stack</a>
+      <a href="#contact" class="block py-2 hover:text-blue-400">Contato</a>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 dark-gradient-bg text-white relative overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-10 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl"></div>
-        <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-purple-500 rounded-full blur-xl"></div>
-        <div class="absolute bottom-20 left-1/3 w-24 h-24 bg-cyan-500 rounded-full blur-xl"></div>
-      </div>
-      <div
-        class="container mx-auto px-6 flex flex-col md:flex-row items-center relative z-10"
-      >
-        <div class="md:w-1/2 mb-12 md:mb-0 animate-fadeInUp">
-          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
-            Transformando ideias em <span class="text-blue-400">soluções digitais</span>
-          </h1>
-          <p class="text-xl mb-8 text-gray-300">
-            Desenvolvimento de sistemas personalizados e automações para
-            otimizar seus processos de negócio.
-          </p>
-          <div
-            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
-          >
-            <a
-              href="#contact"
-              class="btn-primary px-8 py-3 rounded-lg font-semibold transition duration-300 text-center glow"
-              >Fale comigo</a
-            >
-            <a
-              href="#projects"
-              class="btn-outline text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center"
-              >Ver projetos</a
-            >
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center relative overflow-hidden pt-24">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#1e3a8a_0%,_#020617_70%)]"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div class="lg:w-1/2 animate-fadeUp">
+          <div class="inline-flex items-center gap-2 bg-blue-500/10 rounded-full px-4 py-1.5 border border-blue-500/20 mb-6">
+            <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-blue-400 opacity-75"></span><span class="relative rounded-full h-2 w-2 bg-blue-500"></span></span>
+            <span class="text-sm text-blue-300 font-medium">Disponível para novos projetos</span>
+          </div>
+          <h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-6">Transformando ideias em<span class="gradient-text"> soluções digitais</span></h1>
+          <p class="text-xl text-gray-300 mb-8 max-w-xl">Desenvolvimento de sistemas sob medida, automações inteligentes e parcerias tecnológicas que alavancam negócios.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#contact" class="btn-primary px-8 py-3 rounded-xl font-semibold shadow-lg transition">Fale comigo <i class="fas fa-arrow-right ml-2"></i></a>
+            <a href="#projects" class="border border-blue-500/50 px-8 py-3 rounded-xl font-semibold hover:bg-blue-500/10 transition">Ver portfólio</a>
           </div>
         </div>
-        <div class="md:w-1/2 flex justify-center animate-fadeInUp animate-delay-200">
-          <div class="relative">
-            <img
-              src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-              alt="Desenvolvimento de sistemas"
-              class="rounded-lg shadow-2xl max-w-full h-auto glow"
-            />
-            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-500 rounded-full opacity-20 blur-xl"></div>
+        <div class="lg:w-1/2 relative animate-fadeUp" style="animation-delay: 0.15s">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coding" class="w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-transparent"></div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-          Meus Serviços
-        </h2>
-        <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-          Soluções personalizadas para otimizar seus processos e impulsionar
-          seus negócios
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-robot text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Automação de Processos</h3>
-            <p class="text-gray-300">
-              Desenvolvimento de scripts e sistemas para automatizar tarefas
-              repetitivas, aumentando eficiência e reduzindo erros.
-            </p>
-          </div>
-
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-laptop-code text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Sistemas Personalizados</h3>
-            <p class="text-gray-300">
-              Criação de sistemas sob medida para atender às necessidades
-              específicas do seu negócio ou projeto.
-            </p>
-          </div>
-
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-globe text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Desenvolvimento Web</h3>
-            <p class="text-gray-300">
-              Criação de sites e aplicações web responsivos e funcionais para
-              fortalecer sua presença digital.
-            </p>
-          </div>
-
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-file-alt text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Extração de Dados e OCR</h3>
-            <p class="text-gray-300">
-              Extração automática de informações de documentos como PDFs,
-              transformando dados em arquivos úteis para seu negócio.
-            </p>
-          </div>
-
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-headset text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Suporte Técnico</h3>
-            <p class="text-gray-300">
-              Atendimento rápido e dedicado para solucionar problemas e garantir
-              o funcionamento contínuo dos sistemas.
-            </p>
-          </div>
-
-          <div
-            class="service-card p-8 rounded-xl transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <div class="text-blue-400 mb-4">
-              <i class="fas fa-tools text-4xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-white">Manutenção de Sistemas</h3>
-            <p class="text-gray-300">
-              Atualizações, correções e melhorias para manter seus sistemas
-              estáveis, seguros e atualizados.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    
-    <!-- Parceiros Section -->
-<!-- Parceiros Section -->
-<section id="partners" class="py-20">
-  <div class="container mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-      Empresas Parceiras
-    </h2>
-    <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-      Parcerias estratégicas que fortalecem nossos resultados e entregas
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Parceiro 1 -->
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp">
-        <div class="logo-container">
-          <img src="./img/barontech.png" alt="Logo da Empresa" class="max-h-24 object-contain" />
-        </div>
-        <div class="p-6 text-center">
-          <h3 class="text-xl font-bold mb-2 text-white">BaronTech</h3>
-          <p class="text-gray-300 mb-4">
-            Apps e softwares sob medida para impulsionar o seu negócio.
-          </p>
-          <a href="https://barontech.com.br/" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium transition duration-300">
-            Visitar site
-          </a>
-        </div>
-      </div>
-
-      <!-- Parceiro 2 -->
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-100">
-        <div class="logo-container">
-          <img src="./img/xulis.png" alt="Logo da Empresa" class="max-h-24 object-contain" />
-        </div>
-        <div class="p-6 text-center">
-          <h3 class="text-xl font-bold mb-2 text-white">Xulis</h3>
-          <p class="text-gray-300 mb-4">
-            O financeiro? Pode deixar com a gente.
-          </p>
-          <a href="https://xulis.com.br/" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium transition duration-300">
-            Visitar site
-          </a>
-        </div>
-      </div>
-
-      <!-- Parceiro 3 -->
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-200">
-        <div class="logo-container">
-          <img src="./img/WhatsApp-Image-2023-04-13-at-14.04.28.jpeg" width="1500" alt="Logo da Empresa" class="max-h-24 object-contain" />
-        </div>
-        <div class="p-6 text-center">
-          <h3 class="text-xl font-bold mb-2 text-white">Persona & Você Coworking</h3>
-          <p class="text-gray-300 mb-4">
-            Aqui, clientes e especialistas se encontram!
-          </p>
-          <a href="https://personaevoce.com.br/" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium transition duration-300">
-            Visitar site
-          </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- Projetos Colaborativos Section -->
-<section id="collab" class="py-20">
-  <div class="container mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-      Projetos que Colaborei
-    </h2>
-    <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-      Projetos desenvolvidos em conjunto com outras equipes e profissionais
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Projeto Colaborativo 1 -->
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp">
-        <div class="overflow-hidden rounded-t-xl bg-gray-800">
-          <img src="./img/Dragon.png" alt="Projeto colaborativo" class="w-full h-full object-cover" />
+  <!-- About Section - Experiências atuais -->
+  <section id="about" class="py-24 relative">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-5">
+          <h2 class="section-title text-4xl font-bold">Sobre mim</h2>
+          <p class="text-gray-300 leading-relaxed">Olá, sou Felipe Savioli, desenvolvedor full-stack especializado em automação de processos e sistemas personalizados. Minha jornada combina lógica, criatividade e um olhar estratégico para criar ferramentas que realmente resolvem desafios de negócio.</p>
+          <p class="text-gray-300">Atualmente atuo como <strong class="text-blue-400">Desenvolvedor Colaborativo na BaronTech e Xulis</strong>, além de projetos freelance, onde entrego desde ERPs completos até extratores de dados baseados em OCR. Tenho paixão por transformar fluxos manuais em automações inteligentes, reduzindo custos e aumentando eficiência.</p>
+          <div class="grid grid-cols-2 gap-4 pt-4">
+            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-400"></i><span>+12 sistemas entregues</span></div>
+            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-400"></i><span>+6 parceiros ativos</span></div>
+            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-400"></i><span>Automação OCR / IA</span></div>
+            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-400"></i><span>ERP & Fintechs</span></div>
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 text-white">Dragon ERP</h3>
-          <p class="text-gray-300 mb-4">
-            Um sistema de ERP para estabelecimentos comerciais.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span>
-            <span class="skill-badge bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full">MySQL</span>
-            <span class="skill-badge bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full">Tailwindcss</span>
-            <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
+        <div class="bg-dark-surface/50 rounded-2xl p-8 border border-blue-500/20 backdrop-blur-sm">
+          <i class="fas fa-quote-left text-blue-400 text-3xl opacity-50 mb-4 block"></i>
+          <p class="text-lg italic text-gray-200">"Construo soluções que unem tecnologia de ponta com simplicidade de uso. Meu foco é entregar valor real, seja automatizando um relatório ou criando um ecossistema financeiro completo."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"><i class="fas fa-code text-white"></i></div>
+            <div><strong>Felipe Savioli</strong><p class="text-sm text-gray-400">Desenvolvedor de Sistemas & Automação</p></div>
           </div>
         </div>
       </div>
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-100">
-        <div class="overflow-hidden rounded-t-xl bg-gray-800">
-          <img src="./img/xulis_800_600.jpg" alt="Projeto colaborativo" class="w-full h-full object-cover" />
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 text-white">Xulis</h3>
-          <p class="text-gray-300 mb-4">
-           Ecossistema financeiro completo que automatiza pagamentos, elimina fraudes e fideliza clientes.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-               <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span>
-            <span class="skill-badge bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full">MySQL</span>
-            <span class="skill-badge bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full">Tailwindcss</span>
-            <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-200">
-        <div class="h-48 overflow-hidden bg-gray-800">
-          <img src="./img/cisnepay.png" alt="Projeto colaborativo" class="object-fit w-full h-full" />
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 text-white">CisnePay</h3>
-          <p class="text-gray-300 mb-4">
-            Erp whitelabel personalizado para nossos clientes.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-              <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span>
-            <span class="skill-badge bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full">MySQL</span>
-            <span class="skill-badge bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full">Tailwindcss</span>
-            <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp">
-        <div class="h-48 overflow-hidden bg-gray-800">
-          <img src="./img/xulis_800_600.jpg" alt="Projeto colaborativo" class="w-full h-full object-cover" />
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 text-white">Xulis Parceiros</h3>
-          <p class="text-gray-300 mb-4">
-            O portal de parceiros do Xulis.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
-          </div>
-        </div>
-      </div>
-      
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="projects" class="py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-          Meus Projetos
-        </h2>
-        <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-          Soluções práticas desenvolvidas para clientes reais
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project 1 -->
-          <div
-            class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp"
-          >
-            <div class="h-48 overflow-hidden bg-gray-800">
-              <img
-                src="./img/doctorplus.png"
-                alt="Sistema de automação comercial"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 text-white">Doctor +</h3>
-              <p class="text-gray-300 mb-4">
-                Sistema ERP integrado para gestão de agenda, CRM de pacientes e movimentação de prontuários médicos.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full"
-                  >PHP</span
-                >
-                <span
-                  class="skill-badge bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full"
-                  >MySQL</span
-                >
-                <span
-                  class="skill-badge bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full"
-                  >Bootstrap</span
-                >
-              </div>
-              
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div
-            class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <div class="h-48 overflow-hidden bg-gray-800">
-              <img
-                src="./img/Personaevc.png"
-                alt="Dashboard de analytics"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 text-white">Manutenção Persona Coworking</h3>
-              <p class="text-gray-300 mb-4">
-                Manutenção do site Persona e você, criando funcionalidades e fazendo a sustentação do sistema.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="skill-badge bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full"
-                  >Wordpress</span
-                >
-                <span
-                  class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full"
-                  >PHP</span
-                >
-              </div>
-             
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div
-            class="project-card rounded-xl overflow-hidden transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <div class="h-48 overflow-hidden bg-gray-800">
-              <img
-                src="./img/tiss.png"
-                alt="Automação de marketing"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 text-white">Extrator de Dados Médicos</h3>
-              <p class="text-gray-300 mb-4">
-                Automação de extração de dados médicos de PDFs, transformando informações em arquivos úteis para o negócio.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="skill-badge bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full"
-                  >Python</span
-                >
-                <span
-                  class="skill-badge bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full"
-                  >PyMuPDF</span
-                >
-                <span
-                  class="skill-badge bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full"
-                  >Pytesseract</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
+  <!-- Services -->
+  <section id="services" class="py-24 bg-dark-surface/30">
+    <div class="container mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="section-title text-4xl font-bold inline-block">Serviços especializados</h2>
+        <p class="text-gray-300 mt-6">Da automação de processos ao desenvolvimento de sistemas robustos, entrego soluções sob medida.</p>
       </div>
-    </section>
-    <!-- Skills Section -->
-    <section id="skills" class="py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-          Minhas Habilidades
-        </h2>
-        <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-          Tecnologias e ferramentas que domino para entregar soluções de
-          qualidade
-        </p>
-
-        <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
-        >
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-              alt="Python"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Python</span>
-          </div>
-
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-              alt="PHP"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">PHP</span>
-          </div>
-
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-              alt="MySQL"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">MySQl</span>
-          </div>
-
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
-              alt="Bootstrap"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Bootstrap</span>
-          </div>
-
-        <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-              alt="HTML5"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">HTML5</span>
-          </div>
-
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-              alt="CSS3"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">CSS3</span>
-          </div>
-
-          <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg"
-              alt="Wordpress"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Wordpress</span>
-          </div>
-
-           <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-              alt="Javascript"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Javascript</span>
-          </div>
-
-           <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-              alt="Git"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Git</span>
-          </div>
-
-           <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-              alt="GitHub"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">GitHub</span>
-          </div>
-
-           <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-100"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg"
-              alt="Apache"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Apache</span>
-          </div>
-
-           <div
-            class="skill-item flex flex-col items-center p-6 bg-dark-card rounded-xl hover:shadow-md transition duration-300 animate-fadeInUp animate-delay-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
-              alt="Bash/Shell"
-              class="skill-icon"
-            />
-            <span class="font-medium text-white">Bash/Shell</span>
-          </div>
-         </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-robot text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">Automação Inteligente</h3><p class="text-gray-400">Scripts e bots que reduzem trabalho manual, integrando sistemas e otimizando fluxos.</p></div>
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-laptop-code text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">Sistemas Personalizados</h3><p class="text-gray-400">ERPs, dashboards e CRMs feitos sob medida para seu modelo de negócio.</p></div>
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-file-alt text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">OCR & Extração de Dados</h3><p class="text-gray-400">Automatize leitura de PDFs, notas fiscais e documentos com Python e visão computacional.</p></div>
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-globe text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">Desenvolvimento Web</h3><p class="text-gray-400">Sites responsivos, portais e aplicações web modernas com foco em performance.</p></div>
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-headset text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">Suporte & Manutenção</h3><p class="text-gray-400">Acompanhamento contínuo, correções e melhorias para sistemas em produção.</p></div>
+        <div class="bg-dark-card p-7 rounded-2xl border border-white/5 hover:border-blue-500/40 transition hover-lift"><i class="fas fa-chart-line text-4xl text-blue-400 mb-4"></i><h3 class="text-xl font-bold mb-2">Integração de APIs</h3><p class="text-gray-400">Conecte seu negócio a gateways de pagamento, ERPs e serviços externos.</p></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white animate-fadeInUp">
-            Vamos trabalhar juntos?
-        </h2>
-        <p class="text-xl text-center text-gray-300 mb-16 max-w-2xl mx-auto animate-fadeInUp">
-            Entre em contato para discutirmos como posso ajudar no seu projeto
-        </p>
-
-        <div class="max-w-2xl mx-auto px-4">
-            <div class="bg-dark-card p-8 rounded-xl shadow-md animate-fadeInUp">
-                <div class="flex flex-col items-center">
-                    <h3 class="text-xl font-bold mb-6 text-white text-center">
-                        Informações de contato
-                    </h3>
-
-                    <div class="space-y-6 w-full">
-                        <!-- Email -->
-                        <div class="flex flex-col items-center">
-                            <div class="text-blue-400 mb-2">
-                                <i class="fas fa-envelope text-2xl"></i>
-                            </div>
-                            <div class="text-center">
-                                <h4 class="font-medium text-white">Email</h4>
-                                <p class="text-gray-300 text-sm">fesavi.negocios@gmail.com</p>
-                            </div>
-                        </div>
-                        <!-- Telefone -->
-                        <div class="flex flex-col items-center">
-                            <div class="text-blue-400 mb-2">
-                                <i class="fas fa-phone-alt text-2xl"></i>
-                            </div>
-                            <div class="text-center">
-                                <h4 class="font-medium text-white">Telefone</h4>
-                                <p class="text-gray-300">+55 (11) 99510-1704</p>
-                            </div>
-                        </div>
-                        <!-- Localização -->
-                        <div class="flex flex-col items-center">
-                            <div class="text-blue-400 mb-2">
-                                <i class="fas fa-map-marker-alt text-2xl"></i>
-                            </div>
-                            <div class="text-center">
-                                <h4 class="font-medium text-white">Localização</h4>
-                                <p class="text-gray-300">Online</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 w-full flex flex-col items-center">
-                        <h4 class="font-medium text-white mb-4 text-center">Redes sociais</h4>
-                        <div class="flex justify-center space-x-4">
-                            <a href="https://www.linkedin.com/in/felipe-savioli-dev/" class="text-blue-400 hover:text-blue-300 text-2xl transition duration-300">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://github.com/Felipe-AVS" class="text-blue-400 hover:text-blue-300 text-2xl transition duration-300">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="text-blue-400 hover:text-blue-300 text-2xl transition duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://wa.me/5511995101704?text=Ol%C3%A1%21%20Tudo%20bem%3F%20Gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os%20e%20tenho%20interesse%20em%20contratar.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%2C%20por%20favor%3F%20Obrigado%21" class="text-blue-400 hover:text-blue-300 text-2xl transition duration-300">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</section>
-
-
-
-    <!-- Footer -->
-    <footer class="bg-dark-card py-12">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-6 md:mb-0">
-            <div class="flex items-center">
-              <span class="text-2xl font-bold text-blue-400">Savioli</span>
-              <span class="text-2xl font-bold text-white">Dev</span>
-            </div>
-            <p class="mt-2 text-gray-400">Soluções em sistemas e automações</p>
-          </div>
-
-          <div
-            class="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0"
-          >
-            <div>
-              <h4 class="font-bold mb-3 text-white">Links</h4>
-              <ul class="space-y-2">
-                <li>
-                  <a
-                    href="#home"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Início</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#services"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Serviços</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#projects"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Projetos</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Contato</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 class="font-bold mb-3 text-white">Serviços</h4>
-              <ul class="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Automação</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Sistemas Web</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Integração</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-400 hover:text-white transition duration-300"
-                    >Consultoria</a
-                  >
-                </li>
-              </ul>
-            </div>
+  <!-- Experiência Profissional (timeline) -->
+  <section id="experience" class="py-24">
+    <div class="container mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="section-title text-4xl font-bold inline-block">Trajetória profissional</h2>
+        <p class="text-gray-300 mt-6">Colaborações reais e experiências que moldaram minha abordagem técnica e de negócios.</p>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-10">
+        <div class="timeline-item relative">
+          <div class="timeline-dot"></div>
+          <div class="bg-dark-card/70 p-6 rounded-2xl border border-blue-500/10 hover:border-blue-500/30 transition">
+            <div class="flex flex-wrap justify-between items-start mb-2"><h3 class="text-xl font-bold">Desenvolvedor Colaborador</h3><span class="text-sm text-blue-300">2024 - presente</span></div>
+            <p class="text-blue-300 font-medium mb-2">BaronTech · Apps e softwares sob medida</p>
+            <p class="text-gray-400">Desenvolvimento de aplicações web e sistemas personalizados para clientes de diversos setores. Implementação de dashboards interativos e automações backend com PHP e MySQL.</p>
           </div>
         </div>
-
-        <div
-          class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center"
-        >
-          <p class="text-gray-400 text-sm mb-4 md:mb-0">
-            ©2025 Savioli Dev. Todos os direitos reservados.
-          </p>
+        <div class="timeline-item relative">
+          <div class="timeline-dot"></div>
+          <div class="bg-dark-card/70 p-6 rounded-2xl border border-blue-500/10 hover:border-blue-500/30 transition">
+            <div class="flex flex-wrap justify-between items-start mb-2"><h3 class="text-xl font-bold">Full Stack Developer (Ecosystem)</h3><span class="text-sm text-blue-300">2023 - presente</span></div>
+            <p class="text-blue-300 font-medium mb-2">Xulis · Ecossistema Financeiro</p>
+            <p class="text-gray-400">Atuação no núcleo do ERP financeiro Xulis, desenvolvimento de portal de parceiros em React e manutenção de sistemas de automação de pagamentos, reduzindo fraudes e aumentando retenção.</p>
+          </div>
+        </div>
+        <div class="timeline-item relative">
+          <div class="timeline-dot"></div>
+          <div class="bg-dark-card/70 p-6 rounded-2xl border border-blue-500/10 hover:border-blue-500/30 transition">
+            <div class="flex flex-wrap justify-between items-start mb-2"><h3 class="text-xl font-bold">Freelancer & Consultor</h3><span class="text-sm text-blue-300">2022 - presente</span></div>
+            <p class="text-blue-300 font-medium mb-2">Projetos próprios · Automação e Sistemas</p>
+            <p class="text-gray-400">Criação do sistema Doctor+ (ERP médico), extrator de dados TISS com OCR, manutenção de portais institucionais e consultoria para adoção de automações em pequenas e médias empresas.</p>
+          </div>
+        </div>
+        <div class="timeline-item relative">
+          <div class="timeline-dot"></div>
+          <div class="bg-dark-card/70 p-6 rounded-2xl border border-blue-500/10 hover:border-blue-500/30 transition">
+            <div class="flex flex-wrap justify-between items-start mb-2"><h3 class="text-xl font-bold">Colaboração Técnica</h3><span class="text-sm text-blue-300">2023</span></div>
+            <p class="text-blue-300 font-medium mb-2">CisnePay · ERP Whitelabel</p>
+            <p class="text-gray-400">Desenvolvimento de módulos para ERP white-label, customizações e integração com APIs de pagamento, atendendo demandas de parceiros estratégicos.</p>
+          </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <script>
-      // Mobile menu toggle
-      document
-        .getElementById("menu-toggle")
-        .addEventListener("click", function () {
-          const mobileMenu = document.getElementById("mobile-menu");
-          mobileMenu.classList.toggle("hidden");
-        });
+  <!-- Parceiros -->
+  <section id="partners" class="py-24 bg-dark-surface/30">
+    <div class="container mx-auto px-6">
+      <h2 class="section-title text-4xl font-bold text-center mb-4">Empresas parceiras</h2>
+      <p class="text-center text-gray-300 max-w-2xl mx-auto mb-16">Parcerias estratégicas que potencializam entregas e inovação contínua.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-dark-card rounded-2xl overflow-hidden border border-white/10 hover-lift text-center p-6"><img src="./img/barontech.png" alt="BaronTech" class="h-20 mx-auto object-contain mb-4" /><h3 class="text-xl font-bold">BaronTech</h3><p class="text-gray-400 text-sm mt-2">Apps e softwares sob medida</p><a href="https://barontech.com.br/" target="_blank" class="text-blue-400 text-sm mt-3 inline-block">Visitar <i class="fas fa-external-link-alt ml-1 text-xs"></i></a></div>
+        <div class="bg-dark-card rounded-2xl overflow-hidden border border-white/10 hover-lift text-center p-6"><img src="./img/xulis.png" alt="Xulis" class="h-20 mx-auto object-contain mb-4" /><h3 class="text-xl font-bold">Xulis</h3><p class="text-gray-400 text-sm">Ecossistema financeiro completo</p><a href="https://xulis.com.br/" target="_blank" class="text-blue-400 text-sm mt-3 inline-block">Visitar</a></div>
+        <div class="bg-dark-card rounded-2xl overflow-hidden border border-white/10 hover-lift text-center p-6"><img src="./img/WhatsApp-Image-2023-04-13-at-14.04.28.jpeg" alt="Persona Coworking" class="h-20 mx-auto object-contain mb-4" /><h3 class="text-xl font-bold">Persona & Você Coworking</h3><p class="text-gray-400 text-sm">Hub de profissionais e especialistas</p><a href="https://personaevoce.com.br/" target="_blank" class="text-blue-400 text-sm mt-3 inline-block">Visitar</a></div>
+      </div>
+    </div>
+  </section>
 
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
+  <!-- Projetos colaborativos + pessoais -->
+  <section id="projects" class="py-24">
+    <div class="container mx-auto px-6">
+      <h2 class="section-title text-4xl font-bold text-center mb-4">Projetos em destaque</h2>
+      <p class="text-center text-gray-300 max-w-2xl mx-auto mb-16">Soluções reais desenvolvidas em colaboração ou como autor principal.</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/Dragon.png" class="w-full h-full object-cover project-img group-hover:scale-105 transition" /></div><div class="p-6"><h3 class="text-xl font-bold">Dragon ERP</h3><p class="text-gray-400 text-sm my-2">ERP completo para estabelecimentos comerciais, com gestão de estoque, vendas e relatórios.</p><div class="flex gap-2 flex-wrap mt-3"><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span><span class="bg-green-900/40 text-green-200 text-xs px-3 py-1 rounded-full">MySQL</span><span class="bg-yellow-900/40 text-yellow-200 text-xs px-3 py-1 rounded-full">Tailwind</span></div></div></div>
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/xulis_800_600.jpg" class="w-full h-full object-cover project-img" /></div><div class="p-6"><h3 class="text-xl font-bold">Xulis Core</h3><p class="text-gray-400 text-sm my-2">Ecossistema financeiro que automatiza pagamentos e elimina fraudes, com portal parceiros.</p><div class="flex gap-2 flex-wrap"><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span><span class="bg-purple-900/40 text-purple-200 text-xs px-3 py-1 rounded-full">React</span></div></div></div>
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/doctorplus.png" class="w-full h-full object-cover project-img" /></div><div class="p-6"><h3 class="text-xl font-bold">Doctor+</h3><p class="text-gray-400 text-sm my-2">Sistema ERP médico com gestão de agenda, prontuários e CRM de pacientes.</p><div class="flex gap-2 flex-wrap"><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span><span class="bg-green-900/40 text-green-200 text-xs px-3 py-1 rounded-full">Bootstrap</span></div></div></div>
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/tiss.png" class="w-full h-full object-cover project-img" /></div><div class="p-6"><h3 class="text-xl font-bold">Extrator TISS/OCR</h3><p class="text-gray-400 text-sm my-2">Automação para extração de dados médicos de PDFs, utilizando PyMuPDF e Tesseract.</p><div class="flex gap-2 flex-wrap"><span class="bg-yellow-900/40 text-yellow-200 text-xs px-3 py-1 rounded-full">Python</span><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">OCR</span></div></div></div>
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/cisnepay.png" class="w-full h-full object-cover project-img" /></div><div class="p-6"><h3 class="text-xl font-bold">CisnePay</h3><p class="text-gray-400 text-sm my-2">ERP whitelabel personalizado para parceiros, com módulos de gestão financeira.</p><div class="flex gap-2 flex-wrap"><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">PHP</span><span class="bg-purple-900/40 text-purple-200 text-xs px-3 py-1 rounded-full">Laravel</span></div></div></div>
+        <div class="group bg-dark-card rounded-2xl overflow-hidden border border-white/10 transition hover-lift"><div class="h-48 overflow-hidden"><img src="./img/Personaevc.png" class="w-full h-full object-cover project-img" /></div><div class="p-6"><h3 class="text-xl font-bold">Portal Persona</h3><p class="text-gray-400 text-sm my-2">Manutenção e novas funcionalidades no site Persona & Você, com WordPress e PHP.</p><div class="flex gap-2 flex-wrap"><span class="bg-blue-900/40 text-blue-200 text-xs px-3 py-1 rounded-full">WordPress</span><span class="bg-green-900/40 text-green-200 text-xs px-3 py-1 rounded-full">PHP</span></div></div></div>
+      </div>
+    </div>
+  </section>
 
-          const targetId = this.getAttribute("href");
-          const targetElement = document.querySelector(targetId);
+  <!-- Skills -->
+  <section id="skills" class="py-24 bg-dark-surface/20">
+    <div class="container mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="section-title text-4xl font-bold inline-block">Tecnologias & Ferramentas</h2>
+        <p class="text-gray-300 mt-6">Stack moderna e versátil para construir soluções de ponta a ponta.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-python text-4xl text-blue-400"></i><p class="mt-2 font-medium">Python</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-php text-4xl text-indigo-400"></i><p class="mt-2 font-medium">PHP</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fas fa-database text-4xl text-cyan-400"></i><p class="mt-2 font-medium">MySQL</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-js text-4xl text-yellow-400"></i><p class="mt-2 font-medium">JavaScript</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-react text-4xl text-sky-400"></i><p class="mt-2 font-medium">React</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-bootstrap text-4xl text-purple-400"></i><p class="mt-2 font-medium">Bootstrap</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-wordpress text-4xl text-blue-300"></i><p class="mt-2 font-medium">WordPress</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fab fa-git-alt text-4xl text-orange-400"></i><p class="mt-2 font-medium">Git/GitHub</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fas fa-terminal text-4xl text-gray-300"></i><p class="mt-2 font-medium">Bash/Linux</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fas fa-chart-line text-4xl text-emerald-400"></i><p class="mt-2 font-medium">APIs REST</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fas fa-robot text-4xl text-blue-500"></i><p class="mt-2 font-medium">OCR / Automação</p></div>
+        <div class="bg-dark-card p-5 rounded-xl text-center hover:scale-105 transition"><i class="fas fa-cloud text-4xl text-slate-400"></i><p class="mt-2 font-medium">Apache/Docker</p></div>
+      </div>
+    </div>
+  </section>
 
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: "smooth",
-            });
+  <!-- Contato refinado -->
+  <section id="contact" class="py-24">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="glass-card rounded-2xl p-8 md:p-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Vamos construir algo incrível?</h2>
+        <p class="text-gray-300 mb-8">Entre em contato para discutirmos automações, sistemas ou parcerias.</p>
+        <div class="flex flex-wrap justify-center gap-8 mb-10">
+          <div><i class="fas fa-envelope text-blue-400 text-2xl mb-2 block"></i><p class="text-sm">fesavi.negocios@gmail.com</p></div>
+          <div><i class="fab fa-whatsapp text-green-400 text-2xl mb-2 block"></i><p class="text-sm">+55 (11) 99510-1704</p></div>
+          <div><i class="fab fa-linkedin text-blue-400 text-2xl mb-2 block"></i><p class="text-sm">/in/felipe-savioli-dev</p></div>
+        </div>
+        <div class="flex justify-center gap-6">
+          <a href="https://wa.me/5511995101704?text=Olá! Gostaria de saber mais sobre seus serviços." class="btn-primary px-8 py-3 rounded-xl font-semibold inline-flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="mailto:fesavi.negocios@gmail.com" class="border border-blue-500/50 px-8 py-3 rounded-xl hover:bg-blue-500/10 transition">E-mail comercial</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Close mobile menu if open
-            const mobileMenu = document.getElementById("mobile-menu");
-            if (!mobileMenu.classList.contains("hidden")) {
-              mobileMenu.classList.add("hidden");
-            }
-          }
-        });
+  <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm">
+    <div class="container mx-auto px-6">© 2025 Savioli Dev — Sistemas & Automações. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) { window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' }); mobileMenu?.classList.add('hidden'); }
       });
-
-      // Add shadow to header on scroll
-      window.addEventListener("scroll", function () {
-        const header = document.querySelector("header");
-        if (window.scrollY > 50) {
-          header.classList.add("shadow-lg");
-        } else {
-          header.classList.remove("shadow-lg");
-        }
-      });
-
-      // Animação de entrada para elementos
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fadeInUp');
-          }
-        });
-      }, observerOptions);
-
-      // Observar elementos para animação
-      document.querySelectorAll('section h2, section p, .project-card, .service-card, .skill-item').forEach(el => {
-        observer.observe(el);
-      });
-    </script>
-  </body>
+    });
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if(window.scrollY > 20) header?.classList.add('shadow-2xl', 'bg-dark-card/90');
+      else header?.classList.remove('shadow-2xl', 'bg-dark-card/90');
+    });
+  </script>
+</body>
 </html>
